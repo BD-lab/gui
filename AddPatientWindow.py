@@ -5,12 +5,34 @@
 # Created by: PyQt5 UI code generator 5.12.3
 #
 # WARNING! All changes made in this file will be lost!
-
+from tokenize import String
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+class Patient:
+    id:int
+    firstName:String
+    lastName:String
+    pesel:String
+    streetName:String
+    buildingNumber:String
+    zipCode:String
+    city:String
+
 
 class Ui_AddPatientWindow(object):
+    def click(self):
+        firstName=self.firstNameInput.text()
+        lastName=self.lastNameInput.text()
+        pesel=self.peselInput.text()
+        streetName=self.streetNameInput.text()
+        buildingNumber=self.buildingNumberInput.text()
+        zipCode=self.zipCodeInput.text()
+        city=self.cityInput.text()
+        #TO DO
+        #tu dac endpoint czy co wy tam chcecie
+        
+
     def setupUi(self, AddPatientWindow):
         AddPatientWindow.setObjectName("AddPatientWindow")
         AddPatientWindow.resize(800, 600)
@@ -26,12 +48,14 @@ class Ui_AddPatientWindow(object):
         self.firstName = QtWidgets.QLabel(self.formLayoutWidget)
         self.firstName.setObjectName("firstName")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.firstName)
+
         self.lastName = QtWidgets.QLabel(self.formLayoutWidget)
         self.lastName.setObjectName("lastName")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.lastName)
         self.lastNameInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.lastNameInput.setObjectName("lastNameInput")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.lastNameInput)
+
         self.pesel = QtWidgets.QLabel(self.formLayoutWidget)
         self.pesel.setObjectName("pesel")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.pesel)
@@ -49,24 +73,31 @@ class Ui_AddPatientWindow(object):
         self.formLayout.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.city)
         self.cityInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.cityInput.setObjectName("cityInput")
+
         self.formLayout.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.cityInput)
         self.zipCodeInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.zipCodeInput.setObjectName("zipCodeInput")
+
         self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.zipCodeInput)
         self.firstNameInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.firstNameInput.setObjectName("firstNameInput")
+
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.firstNameInput)
         self.peselInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.peselInput.setObjectName("peselInput")
+
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.peselInput)
         self.buildingNumberInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.buildingNumberInput.setObjectName("buildingNumberInput")
+
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.buildingNumberInput)
         self.streetNameInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.streetNameInput.setObjectName("streetNameInput")
+
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.streetNameInput)
         self.saveButton = QtWidgets.QPushButton(self.formLayoutWidget)
         self.saveButton.setObjectName("saveButton")
+        self.saveButton.clicked.connect(self.click)
         self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.saveButton)
         AddPatientWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(AddPatientWindow)
