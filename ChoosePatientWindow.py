@@ -11,6 +11,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_ChoosePatientWindow(object):
+    def click(self):
+        pesel=self.peselInput.text()
+        #TO DO
+        #dajcie se endpoint
+        print(pesel)
+
     def setupUi(self, ChoosePatientWindow):
         ChoosePatientWindow.setObjectName("ChoosePatientWindow")
         ChoosePatientWindow.resize(800, 600)
@@ -30,6 +36,7 @@ class Ui_ChoosePatientWindow(object):
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.peselInput)
         self.chooseButton = QtWidgets.QPushButton(self.formLayoutWidget)
         self.chooseButton.setObjectName("chooseButton")
+        self.chooseButton.clicked.connect(self.click)
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.chooseButton)
         ChoosePatientWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(ChoosePatientWindow)
