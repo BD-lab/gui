@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddPatientWindow</class>
- <widget class="QMainWindow" name="AddPatientWindow">
+ <class>Main</class>
+ <widget class="QMainWindow" name="Main">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -14,90 +14,31 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="formLayoutWidget">
+   <widget class="QPushButton" name="ChoosePatient">
     <property name="geometry">
      <rect>
-      <x>-1</x>
-      <y>-1</y>
-      <width>811</width>
-      <height>611</height>
+      <x>314</x>
+      <y>186</y>
+      <width>131</width>
+      <height>61</height>
      </rect>
     </property>
-    <layout class="QFormLayout" name="formLayout">
-     <property name="fieldGrowthPolicy">
-      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-     </property>
-     <item row="0" column="0">
-      <widget class="QLabel" name="firstName">
-       <property name="text">
-        <string>Imię</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="lastName">
-       <property name="text">
-        <string>Nazwisko</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="lastNameInput"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="pesel">
-       <property name="text">
-        <string>Pesel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="streetName">
-       <property name="text">
-        <string>Ulica</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="buildingNumber">
-       <property name="text">
-        <string>Numer Domu</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="zipCode">
-       <property name="text">
-        <string>Kod Pocztowy</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="city">
-       <property name="text">
-        <string>Miasto</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="1">
-      <widget class="QLineEdit" name="cityInput"/>
-     </item>
-     <item row="5" column="1">
-      <widget class="QLineEdit" name="zipCodeInput"/>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="firstNameInput"/>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="peselInput"/>
-     </item>
-     <item row="4" column="1">
-      <widget class="QLineEdit" name="buildingNumberInput"/>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLineEdit" name="streetNameInput"/>
-     </item>
-    </layout>
+    <property name="text">
+     <string>Wybierz Pacjenta</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="AddPatient">
+    <property name="geometry">
+     <rect>
+      <x>314</x>
+      <y>266</y>
+      <width>131</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Dodaj Pacjenta</string>
+    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
