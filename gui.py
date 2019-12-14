@@ -8,9 +8,25 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from AddPatientWindow import Ui_AddPatientWindow
+from ChoosePatientWindow import Ui_ChoosePatientWindow
 
 
 class Ui_Main(object):
+    def AddPatientFun(self):
+        self.window=QtWidgets.QMainWindow()
+        self.ui=Ui_AddPatientWindow()
+        self.ui.setupUi(self.window)
+        Main.hide()
+        self.window.show()
+
+    def ChoosePatientFun(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_ChoosePatientWindow()
+        self.ui.setupUi(self.window)
+        Main.hide()
+        self.window.show()
+
     def setupUi(self, Main):
         Main.setObjectName("Main")
         Main.resize(800, 600)
@@ -19,9 +35,15 @@ class Ui_Main(object):
         self.ChoosePatient = QtWidgets.QPushButton(self.centralwidget)
         self.ChoosePatient.setGeometry(QtCore.QRect(314, 186, 131, 61))
         self.ChoosePatient.setObjectName("ChoosePatient")
+
+        self.ChoosePatient.clicked.connect(self.ChoosePatientFun)
+
         self.AddPatient = QtWidgets.QPushButton(self.centralwidget)
         self.AddPatient.setGeometry(QtCore.QRect(314, 266, 131, 61))
         self.AddPatient.setObjectName("AddPatient")
+
+        self.AddPatient.clicked.connect(self.AddPatientFun)
+
         Main.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(Main)
