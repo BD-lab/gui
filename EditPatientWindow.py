@@ -11,6 +11,17 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_EditPatientWindow(object):
+    def click(self):
+        firstName=self.firstNameInput.text()
+        lastName=self.lastNameInput.text()
+        pesel=self.peselInput.text()
+        streetName=self.streetNameInput.text()
+        buildingNumber=self.buildingNumberInput.text()
+        zipCode=self.zipCodeInput.text()
+        city=self.cityInput.text()
+        #TO DO
+        #tu dac endpoint czy co wy tam chcecie
+
     def setupUi(self, EditPatientWindow):
         EditPatientWindow.setObjectName("EditPatientWindow")
         EditPatientWindow.resize(800, 600)
@@ -67,6 +78,7 @@ class Ui_EditPatientWindow(object):
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.streetNameInput)
         self.saveButton = QtWidgets.QPushButton(self.formLayoutWidget)
         self.saveButton.setObjectName("saveButton")
+        self.saveButton.clicked.connect(self.click)
         self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.saveButton)
         EditPatientWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(EditPatientWindow)
@@ -78,7 +90,7 @@ class Ui_EditPatientWindow(object):
 
     def retranslateUi(self, EditPatientWindow):
         _translate = QtCore.QCoreApplication.translate
-        EditPatientWindow.setWindowTitle(_translate("EditPatientWindow", "MainWindow"))
+        EditPatientWindow.setWindowTitle(_translate("EditPatientWindow", "Edytuj Pacjenta"))
         self.firstName.setText(_translate("EditPatientWindow", "Imię"))
         self.lastName.setText(_translate("EditPatientWindow", "Nazwisko"))
         self.pesel.setText(_translate("EditPatientWindow", "Pesel"))

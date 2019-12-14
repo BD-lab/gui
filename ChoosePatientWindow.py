@@ -8,13 +8,17 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from patient import Ui_MainWindow
 
 
 class Ui_ChoosePatientWindow(object):
     def click(self):
         pesel=self.peselInput.text()
-        #TO DO
-        #dajcie se endpoint
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self.window)
+        #ChoosePatientWindow.hide
+        self.window.show()
         print(pesel)
 
     def setupUi(self, ChoosePatientWindow):
@@ -48,7 +52,7 @@ class Ui_ChoosePatientWindow(object):
 
     def retranslateUi(self, ChoosePatientWindow):
         _translate = QtCore.QCoreApplication.translate
-        ChoosePatientWindow.setWindowTitle(_translate("ChoosePatientWindow", "MainWindow"))
+        ChoosePatientWindow.setWindowTitle(_translate("ChoosePatientWindow", "Wybierz Pacjenta"))
         self.pesel.setText(_translate("ChoosePatientWindow", "Pesel"))
         self.chooseButton.setText(_translate("ChoosePatientWindow", "Wybierz"))
 

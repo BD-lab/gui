@@ -31,7 +31,7 @@ class Ui_AddPatientWindow(object):
         city=self.cityInput.text()
         #TO DO
         #tu dac endpoint czy co wy tam chcecie
-        
+
 
     def setupUi(self, AddPatientWindow):
         AddPatientWindow.setObjectName("AddPatientWindow")
@@ -109,7 +109,7 @@ class Ui_AddPatientWindow(object):
 
     def retranslateUi(self, AddPatientWindow):
         _translate = QtCore.QCoreApplication.translate
-        AddPatientWindow.setWindowTitle(_translate("AddPatientWindow", "MainWindow"))
+        AddPatientWindow.setWindowTitle(_translate("AddPatientWindow", "Dodaj Pacjenta"))
         self.firstName.setText(_translate("AddPatientWindow", "Imię"))
         self.lastName.setText(_translate("AddPatientWindow", "Nazwisko"))
         self.pesel.setText(_translate("AddPatientWindow", "Pesel"))
