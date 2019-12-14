@@ -9,6 +9,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from EditPatientWindow import Ui_EditPatientWindow
+from AddOrder import Ui_AddOrder
+from PrintOrder import Ui_PrintOrder
 
 
 
@@ -20,10 +22,17 @@ class Ui_MainWindow(object):
         #MainWindow.hide()
         self.window.show()
     def add(self):
-        delattr(
-        )
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_AddOrder()
+        self.ui.setupUi(self.window)
+        # MainWindow.hide()
+        self.window.show()
     def print(self):
-        print()
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_PrintOrder()
+        self.ui.setupUi(self.window)
+        # MainWindow.hide()
+        self.window.show()
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
@@ -37,12 +46,14 @@ class Ui_MainWindow(object):
         self.gridLayout.setObjectName("gridLayout")
         self.printButton = QtWidgets.QPushButton(self.gridLayoutWidget)
         self.printButton.setObjectName("printButton")
+        self.printButton.clicked.connect(self.print)
         self.gridLayout.addWidget(self.printButton, 8, 0, 1, 3)
         self.label_3 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 0, 0, 1, 1)
         self.addOrderButton = QtWidgets.QPushButton(self.gridLayoutWidget)
         self.addOrderButton.setObjectName("addOrderButton")
+        self.addOrderButton.clicked.connect(self.add)
         self.gridLayout.addWidget(self.addOrderButton, 5, 0, 1, 3)
         self.lastN = QtWidgets.QLabel(self.gridLayoutWidget)
         self.lastN.setObjectName("lastN")

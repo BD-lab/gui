@@ -11,6 +11,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_PrintOrder(object):
+    def printClick(self):
+        print()
     def setupUi(self, PrintOrder):
         PrintOrder.setObjectName("PrintOrder")
         PrintOrder.resize(800, 600)
@@ -47,7 +49,7 @@ class Ui_PrintOrder(object):
 
     def retranslateUi(self, PrintOrder):
         _translate = QtCore.QCoreApplication.translate
-        PrintOrder.setWindowTitle(_translate("PrintOrder", "MainWindow"))
+        PrintOrder.setWindowTitle(_translate("PrintOrder", "Drukuj wyniki"))
         self.infoText.setText(_translate("PrintOrder", "Dodajesz zamówienie do pacjenta"))
         self.infoPatient.setText(_translate("PrintOrder", "TextLabel"))
         self.listInfo.setText(_translate("PrintOrder", "Lista badań pacjenta"))

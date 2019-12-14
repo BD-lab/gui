@@ -62,7 +62,7 @@ class Ui_AddOrder(object):
 
     def retranslateUi(self, AddOrder):
         _translate = QtCore.QCoreApplication.translate
-        AddOrder.setWindowTitle(_translate("AddOrder", "MainWindow"))
+        AddOrder.setWindowTitle(_translate("AddOrder", "Dodaj zamówienie"))
         self.infoText.setText(_translate("AddOrder", "Dodajesz zamówienie do pacjenta"))
         self.infoPatient.setText(_translate("AddOrder", "TextLabel"))
         self.idOrder.setText(_translate("AddOrder", "Numer zamówienia"))
