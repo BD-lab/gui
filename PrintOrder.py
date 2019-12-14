@@ -34,6 +34,9 @@ class Ui_PrintOrder(object):
         self.list = QtWidgets.QListWidget(self.formLayoutWidget)
         self.list.setObjectName("list")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.list)
+        self.printButton = QtWidgets.QPushButton(self.formLayoutWidget)
+        self.printButton.setObjectName("printButton")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.printButton)
         PrintOrder.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(PrintOrder)
         self.statusbar.setObjectName("statusbar")
@@ -48,6 +51,7 @@ class Ui_PrintOrder(object):
         self.infoText.setText(_translate("PrintOrder", "Dodajesz zamówienie do pacjenta"))
         self.infoPatient.setText(_translate("PrintOrder", "TextLabel"))
         self.listInfo.setText(_translate("PrintOrder", "Lista badań pacjenta"))
+        self.printButton.setText(_translate("PrintOrder", "Drukuj"))
 
 
 if __name__ == "__main__":
