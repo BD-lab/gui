@@ -13,6 +13,7 @@ import  requests
 
 class Ui_AddOrder(object):
     def click(self):
+        idOrder=self.idOrderInput.text()
         exam1=self.comboBox.currentText()
         exam2=self.comboBox_2.currentText()
         exam3=self.comboBox_3.currentText()
