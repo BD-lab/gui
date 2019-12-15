@@ -34,6 +34,9 @@
        </property>
       </widget>
      </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="firstNameInput"/>
+     </item>
      <item row="1" column="0">
       <widget class="QLabel" name="lastName">
        <property name="text">
@@ -51,12 +54,18 @@
        </property>
       </widget>
      </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="peselInput"/>
+     </item>
      <item row="3" column="0">
       <widget class="QLabel" name="streetName">
        <property name="text">
         <string>Ulica</string>
        </property>
       </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="streetNameInput"/>
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="buildingNumber">
@@ -65,12 +74,18 @@
        </property>
       </widget>
      </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="buildingNumberInput"/>
+     </item>
      <item row="5" column="0">
       <widget class="QLabel" name="zipCode">
        <property name="text">
         <string>Kod Pocztowy</string>
        </property>
       </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="zipCodeInput"/>
      </item>
      <item row="6" column="0">
       <widget class="QLabel" name="city">
@@ -82,25 +97,17 @@
      <item row="6" column="1">
       <widget class="QLineEdit" name="cityInput"/>
      </item>
-     <item row="5" column="1">
-      <widget class="QLineEdit" name="zipCodeInput"/>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="firstNameInput"/>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="peselInput"/>
-     </item>
-     <item row="4" column="1">
-      <widget class="QLineEdit" name="buildingNumberInput"/>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLineEdit" name="streetNameInput"/>
-     </item>
      <item row="7" column="1">
       <widget class="QPushButton" name="saveButton">
        <property name="text">
         <string>Zapisz</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="QLabel" name="info">
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </item>
