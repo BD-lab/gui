@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'ChoosePatientWindow.ui'
-#
-# Created by: PyQt5 UI code generator 5.12.3
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from patient import Ui_MainWindow
 import requests
@@ -28,7 +19,7 @@ class Ui_ChoosePatientWindow(object):
             self.ui = Ui_MainWindow(self.firstName, self.lastName, self.id)
             self.ui.setupUi(self.window)
             self.info.setText("Poprawnie wybrano pacjenta")
-            # ChoosePatientWindow.hide()
+            #ChoosePatientWindow.hide()
             self.window.show()
         else:
             self.info.setText("Nie ma takiego pacjenta")

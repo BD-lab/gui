@@ -1,14 +1,5 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'PrintOrder.ui'
-#
-# Created by: PyQt5 UI code generator 5.12.3
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-#from gui import Ui_Main
+
 import requests
 
 
@@ -18,12 +9,6 @@ class Ui_PrintOrder(object):
 
         response = requests.get('http://localhost:8080/orders/result/idOrder(%d)/print' % idOrder)
 
-       # self.window = QtWidgets.QMainWindow()
-        #self.ui = Ui_Main()
-       # self.ui.setupUi(self.window)
-        #ui.hide()
-      #  self.window.show()
-#
     def setupUi(self, PrintOrder):
         PrintOrder.setObjectName("PrintOrder")
         PrintOrder.resize(800, 600)
