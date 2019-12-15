@@ -9,9 +9,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
 class Ui_AddOrder(object):
     def setupUi(self, AddOrder):
+        # TODO w combobox lista z ExamTypes
         AddOrder.setObjectName("AddOrder")
         AddOrder.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(AddOrder)

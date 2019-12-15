@@ -8,30 +8,42 @@
 from tokenize import String
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import requests
+
 
 class Patient:
-    id:int
-    firstName:String
-    lastName:String
-    pesel:String
-    streetName:String
-    buildingNumber:String
-    zipCode:String
-    city:String
+    id: int
+    firstName: String
+    lastName: String
+    pesel: String
+    streetName: String
+    buildingNumber: String
+    zipCode: String
+    city: String
 
 
 class Ui_AddPatientWindow(object):
     def click(self):
-        firstName=self.firstNameInput.text()
-        lastName=self.lastNameInput.text()
-        pesel=self.peselInput.text()
-        streetName=self.streetNameInput.text()
-        buildingNumber=self.buildingNumberInput.text()
-        zipCode=self.zipCodeInput.text()
-        city=self.cityInput.text()
-        #TO DO
-        #tu dac endpoint czy co wy tam chcecie
+        firstName = self.firstNameInput.text()
+        lastName = self.lastNameInput.text()
+        pesel = self.peselInput.text()
+        streetName = self.streetNameInput.text()
+        buildingNumber = self.buildingNumberInput.text()
+        zipCode = self.zipCodeInput.text()
+        city = self.cityInput.text()
 
+        response = requests.post("http://localhost:8080/patients", json={
+            "firstName": firstName,
+            "lastName": lastName,
+            "pesel": pesel,
+            "streetName": streetName,
+            "buildingNumber": buildingNumber,
+            "zipCode": zipCode,
+            "city": city
+        })
+        if response.status_code == 200:
+            print(response.status_code)
+            # TODO komunikat, ze pacjent sie zapisal, inny status to w zaleznosci co przyjdzie bledny pesel/juz istnieje itp
 
     def setupUi(self, AddPatientWindow):
         AddPatientWindow.setObjectName("AddPatientWindow")
@@ -122,6 +134,7 @@ class Ui_AddPatientWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     AddPatientWindow = QtWidgets.QMainWindow()
     ui = Ui_AddPatientWindow()

@@ -8,19 +8,31 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import requests
 
 
 class Ui_EditPatientWindow(object):
     def click(self):
-        firstName=self.firstNameInput.text()
-        lastName=self.lastNameInput.text()
-        pesel=self.peselInput.text()
-        streetName=self.streetNameInput.text()
-        buildingNumber=self.buildingNumberInput.text()
-        zipCode=self.zipCodeInput.text()
-        city=self.cityInput.text()
-        #TO DO
-        #tu dac endpoint czy co wy tam chcecie
+        firstName = self.firstNameInput.text()
+        lastName = self.lastNameInput.text()
+        pesel = self.peselInput.text()
+        streetName = self.streetNameInput.text()
+        buildingNumber = self.buildingNumberInput.text()
+        zipCode = self.zipCodeInput.text()
+        city = self.cityInput.text()
+
+        response = requests.put("http://localhost:8080/patients", json={
+            "firstName": firstName,
+            "lastName": lastName,
+            "pesel": pesel,
+            "streetName": streetName,
+            "buildingNumber": buildingNumber,
+            "zipCode": zipCode,
+            "city": city
+        })
+        if response.status_code == 200:
+            print(response.status_code)
+            #TODO komunikat, ze dane zostaly edytowane, w przeciwnym przypadku zwrocony blad
 
     def setupUi(self, EditPatientWindow):
         EditPatientWindow.setObjectName("EditPatientWindow")
@@ -103,6 +115,7 @@ class Ui_EditPatientWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     EditPatientWindow = QtWidgets.QMainWindow()
     ui = Ui_EditPatientWindow()

@@ -9,6 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from patient import Ui_MainWindow
+import requests
 
 
 class Ui_ChoosePatientWindow(object):
@@ -20,6 +21,11 @@ class Ui_ChoosePatientWindow(object):
         #ChoosePatientWindow.hide
         self.window.show()
         print(pesel)
+        payload = {'pesel': pesel}
+        response = requests.get("http://localhost:8080/patients", params=payload)
+        if response.status_code == 200:
+            print(response.status_code)
+            # TODO przy 200 przejście do kolejnego ekranu, jeśli inny status response komunikat o tym, że pacjent nie istnieje
 
     def setupUi(self, ChoosePatientWindow):
         ChoosePatientWindow.setObjectName("ChoosePatientWindow")
