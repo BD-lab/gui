@@ -12,21 +12,18 @@ import requests
 
 
 class Ui_MainWindow(object):
-    def getOrderNumbers(self):
-        response = requests.get("http://localhost:8080/examinations/orderNumbers")
+    def getOrdersFun(self):
+        response = requests.get("http://localhost:8081/examinations/orderNumbers")
         if response.status_code == 200:
             json = response.json()
-            # TODO zwracana jest po prostu lista stringow z orderNumberami, nw jak to zczytac bo to chyba
-            #  nie ma klucz-wartosc
-
-        print()
+            print(json)
+            for i in json:
+                print(i)
 
     def getExamsFun(self):
-        order_number = "string z ordernumberem"
-        response = requests.post("http://localhost:8080/examinations/order", json={
-            order_number
-            # tu po prostu string z ordernumberem (wazne zeby byl przesylany w ciapkach - "")
-        })
+        order_number = "1234567"  # TODO order number, i chyba powinny byc zwracane tylko typy, a nie cale badania
+        payload = {'orderNumber': order_number}
+        response = requests.get("http://localhost:8081/examinations/order", params=payload)
 
         if response.status_code == 200:
             json = response.json()
@@ -43,7 +40,7 @@ class Ui_MainWindow(object):
 
     def saveFun(self):
         examination_result_id = 1  # TODO pobierany z gui
-        response = requests.put("http://localhost:8080/examinations/examination_result_id(%d)" % examination_result_id)
+        response = requests.put("http://localhost:8081/examinations/examination_result_id(%d)" % examination_result_id)
 
         if response.status_code == 200:
             json = response.json()
@@ -56,8 +53,6 @@ class Ui_MainWindow(object):
             min_norm_value = json['minNormValue']
             max_norm_value = json['maxNormValue']
             is_done = json['isDone']
-
-
 
         print()
 
