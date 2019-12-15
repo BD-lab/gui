@@ -8,18 +8,59 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import requests
 
 
 class Ui_MainWindow(object):
-    def getOrdersFun(self):
-        # TO DO request
+    def getOrderNumbers(self):
+        response = requests.get("http://localhost:8080/examinations/orderNumbers")
+        if response.status_code == 200:
+            json = response.json()
+            # TODO zwracana jest po prostu lista stringow z orderNumberami, nw jak to zczytac bo to chyba
+            #  nie ma klucz-wartosc
+
         print()
+
     def getExamsFun(self):
-        # TO DO request
+        order_number = "string z ordernumberem"
+        response = requests.post("http://localhost:8080/examinations/order", json={
+            order_number
+            # tu po prostu string z ordernumberem (wazne zeby byl przesylany w ciapkach - "")
+        })
+
+        if response.status_code == 200:
+            json = response.json()
+            id = json['id']
+            order_number = json['orderNumber']
+            examination_type = json['type']
+            unit = json['unit']
+            patient_value = json['patientValue']
+            min_norm_value = json['minNormValue']
+            max_norm_value = json['maxNormValue']
+            is_done = json['isDone']
+
         print()
+
     def saveFun(self):
-        # TO DO request
+        examination_result_id = 1  # TODO pobierany z gui
+        response = requests.put("http://localhost:8080/examinations/examination_result_id(%d)" % examination_result_id)
+
+        if response.status_code == 200:
+            json = response.json()
+
+            id = json['id']
+            order_number = json['orderNumber']
+            examination_type = json['type']
+            unit = json['unit']
+            patient_value = json['patientValue']
+            min_norm_value = json['minNormValue']
+            max_norm_value = json['maxNormValue']
+            is_done = json['isDone']
+
+
+
         print()
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
@@ -85,6 +126,7 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
