@@ -10,7 +10,36 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import requests
 
+lastName='x'
+firstName=''
+pesel=''
+streetName=''
+buildingNumber=''
+zipCode=''
+city=''
+
 class Ui_EditPatientWindow(object):
+    def __init__(self, id):
+        print(id)
+        payload = {'patientId': id}
+        response = requests.get("http://localhost:8080/patients", params=payload)
+        print(response.json())
+        global lastName
+        lastName = response.json()['lastName']
+        global firstName
+        firstName = response.json()['firstName']
+        global pesel
+        pesel = response.json()['pesel']
+        global streetName
+        streetName = response.json()['streetName']
+        global buildingNumber
+        buildingNumber = response.json()['buildingNumber']
+        global zipCode
+        zipCode = response.json()['zipCode']
+        global city
+        city = response.json()['city']
+
+
     def click(self):
         firstName = self.firstNameInput.text()
         lastName = self.lastNameInput.text()
@@ -37,6 +66,13 @@ class Ui_EditPatientWindow(object):
             self.label.setText("Wystąpił bład")
 
     def setupUi(self, EditPatientWindow):
+        global lastName
+        global firstName
+        global pesel
+        global streetName
+        global buildingNumber
+        global zipCode
+        global city
         EditPatientWindow.setObjectName("EditPatientWindow")
         EditPatientWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(EditPatientWindow)
@@ -56,6 +92,7 @@ class Ui_EditPatientWindow(object):
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.lastName)
         self.lastNameInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.lastNameInput.setObjectName("lastNameInput")
+        self.lastNameInput.setText(lastName)
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.lastNameInput)
         self.pesel = QtWidgets.QLabel(self.formLayoutWidget)
         self.pesel.setObjectName("pesel")
@@ -74,21 +111,27 @@ class Ui_EditPatientWindow(object):
         self.formLayout.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.city)
         self.cityInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.cityInput.setObjectName("cityInput")
+        self.cityInput.setText(city)
         self.formLayout.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.cityInput)
         self.zipCodeInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.zipCodeInput.setObjectName("zipCodeInput")
+        self.zipCodeInput.setText(zipCode)
         self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.zipCodeInput)
         self.firstNameInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.firstNameInput.setObjectName("firstNameInput")
+        self.firstNameInput.setText(firstName)
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.firstNameInput)
         self.peselInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.peselInput.setObjectName("peselInput")
+        self.peselInput.setText(pesel)
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.peselInput)
         self.buildingNumberInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.buildingNumberInput.setObjectName("buildingNumberInput")
+        self.buildingNumberInput.setText(buildingNumber)
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.buildingNumberInput)
         self.streetNameInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.streetNameInput.setObjectName("streetNameInput")
+        self.streetNameInput.setText(streetName)
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.streetNameInput)
         self.saveButton = QtWidgets.QPushButton(self.formLayoutWidget)
         self.saveButton.setObjectName("saveButton")

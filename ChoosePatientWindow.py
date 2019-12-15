@@ -18,10 +18,15 @@ class Ui_ChoosePatientWindow(object):
         pesel = self.peselInput.text()
         payload = {'pesel': pesel}
         response = requests.get("http://localhost:8080/patients", params=payload)
+        print(response.json())
         if response.status_code == 200:
             print(response.status_code)
             self.window = QtWidgets.QMainWindow()
-            self.ui = Ui_MainWindow()
+            self.message=response.json()
+            self.id=response.json()['id']
+            self.firstName = response.json()['firstName']
+            self.lastName = response.json()['lastName']
+            self.ui = Ui_MainWindow(self.firstName, self.lastName, self.id)
             self.ui.setupUi(self.window)
             self.info.setText("Poprawnie wybrano pacjenta")
             # ChoosePatientWindow.hide()

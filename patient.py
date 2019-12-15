@@ -12,12 +12,23 @@ from EditPatientWindow import Ui_EditPatientWindow
 from AddOrder import Ui_AddOrder
 from PrintOrder import Ui_PrintOrder
 
+lastname = ''
+firstname = ''
+idGlobal = ''
 
 
 class Ui_MainWindow(object):
+    def __init__(self, fn, ln, id):
+        global lastname
+        global firstname
+        global idGlobal
+        lastname=ln
+        firstname=fn
+        idGlobal=id
+
     def edit(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_EditPatientWindow()
+        self.ui = Ui_EditPatientWindow(idGlobal)
         self.ui.setupUi(self.window)
         #MainWindow.hide()
         self.window.show()
@@ -34,6 +45,9 @@ class Ui_MainWindow(object):
         # MainWindow.hide()
         self.window.show()
     def setupUi(self, MainWindow):
+        global lastname
+        global firstname
+        global idGlobal
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -80,13 +94,16 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+        global lastname
+        global firstname
+        global idGlobal
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Pacjent"))
         self.printButton.setText(_translate("MainWindow", "Drukuj wyniki"))
         self.label_3.setText(_translate("MainWindow", "Karta Pacjenta"))
         self.addOrderButton.setText(_translate("MainWindow", "Dodaj zamówienie"))
-        self.lastN.setText(_translate("MainWindow", "Nazwisko"))
-        self.firstN.setText(_translate("MainWindow", "Imię"))
+        self.lastN.setText(_translate("MainWindow", lastname))
+        self.firstN.setText(_translate("MainWindow", firstname))
         self.editPatientButton.setText(_translate("MainWindow", "Edytuj Pacjenta"))
 
 

@@ -12,15 +12,21 @@ from ExamTypes import ExamTypes
 import requests
 
 
+idT =''
+
 class Ui_AddOrder(object):
+    def __init__(self, id):
+        global idT
+        idT=id
     def click(self):
+        global idT
         idOrder = self.idOrderInput.text()
         exam1 = self.comboBox.currentText()
         exam2 = self.comboBox_2.currentText()
         if(exam2=="brak"):
             response = requests.post("http://localhost:8080/orders", json={
                 "orderNumber": idOrder,
-                "patientId": 1,  # TODO patiendId z poprzedniego okienka
+                "patientId": idT,
                 "examinations": [
                     {
                         "type": ExamTypes(exam1).name
