@@ -21,8 +21,8 @@ city=''
 class Ui_EditPatientWindow(object):
     def __init__(self, id):
         print(id)
-        payload = {'patientId': id}
-        response = requests.get("http://localhost:8080/patients", params=payload)
+        url="http://localhost:8080/patients/{}".format(id)
+        response = requests.get(url)
         print(response.json())
         global lastName
         lastName = response.json()['lastName']
