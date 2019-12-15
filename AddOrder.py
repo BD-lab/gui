@@ -9,22 +9,84 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from ExamTypes import ExamTypes
-import  requests
+import requests
+
 
 class Ui_AddOrder(object):
     def click(self):
-        idOrder=self.idOrderInput.text()
-        exam1=self.comboBox.currentText()
-        exam2=self.comboBox_2.currentText()
-        exam3=self.comboBox_3.currentText()
-        exam4=self.comboBox_4.currentText()
-        #TO DO
-        #if response.status_code == 200:
-        #    print(response.status_code)
-            #self.info.setText("Poprawnie zlecono badania")
+        idOrder = self.idOrderInput.text()
+        exam1 = self.comboBox.currentText()
+        exam2 = self.comboBox_2.currentText()
+        if(exam2=="brak"):
+            response = requests.post("http://localhost:8080/orders", json={
+                "orderNumber": idOrder,
+                "patientId": 1,  # TODO patiendId z poprzedniego okienka
+                "examinations": [
+                    {
+                        "type": ExamTypes(exam1).name
+                    },
+                ]
+            })
+        exam3 = self.comboBox_3.currentText()
+        if(exam3=="brak"):
+            response = requests.post("http://localhost:8080/orders", json={
+                "orderNumber": idOrder,
+                "patientId": 1,  # TODO patiendId z poprzedniego okienka
+                "examinations": [
+                    {
+                        "type": ExamTypes(exam1).name
+                    },
+                    {
+                        "type": ExamTypes(exam2).name
+                    },
+                ]
+            })
 
-        #else:
-        #    self.info.setText("Wystąpił bład")
+        exam4 = self.comboBox_4.currentText()
+        if(exam4=="brak"):
+            response = requests.post("http://localhost:8080/orders", json={
+            "orderNumber": idOrder,
+            "patientId": 1, #TODO patiendId z poprzedniego okienka
+            "examinations": [
+                {
+                    "type": ExamTypes(exam1).name
+                },
+                {
+                    "type": ExamTypes(exam2).name
+                },
+                {
+                    "type": ExamTypes(exam3).name
+                },
+            ]
+        })
+        else:
+            response = requests.post("http://localhost:8080/orders", json={
+                "orderNumber": idOrder,
+                "patientId": 1, #TODO patiendId z poprzedniego okienka
+                "examinations": [
+                    {
+                        "type": ExamTypes(exam1).name
+                    },
+                    {
+                        "type": ExamTypes(exam2).name
+                    },
+                    {
+                        "type": ExamTypes(exam3).name
+                    },
+                    {
+                        "type": ExamTypes(exam4).name
+                    }
+                ]
+            })
+
+        if response.status_code == 200:
+           print(response.status_code)
+           self.info.setText("Poprawnie zlecono badania")
+
+        else:
+           print(response.status_code)
+           self.info.setText("Wystąpił bład")
+
     def setupUi(self, AddOrder):
         AddOrder.setObjectName("AddOrder")
         AddOrder.resize(800, 600)
@@ -251,6 +313,7 @@ class Ui_AddOrder(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     AddOrder = QtWidgets.QMainWindow()
     ui = Ui_AddOrder()

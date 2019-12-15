@@ -15,7 +15,8 @@ import requests
 class Ui_PrintOrder(object):
     def printClick(self):
         idOrder=self.orderInput.text()
-        # TO DO request na drukowanie wyników
+
+        response = requests.get('http://localhost:8080/orders/result/idOrder(%d)/print' % idOrder)
 
        # self.window = QtWidgets.QMainWindow()
         #self.ui = Ui_Main()
@@ -42,6 +43,7 @@ class Ui_PrintOrder(object):
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.listInfo)
         self.printButton = QtWidgets.QPushButton(self.formLayoutWidget)
         self.printButton.setObjectName("printButton")
+        self.printButton.clicked.connect(self.printClick)
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.printButton)
         self.orderInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.orderInput.setObjectName("orderInput")
