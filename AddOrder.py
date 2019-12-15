@@ -13,10 +13,14 @@ import  requests
 
 class Ui_AddOrder(object):
     def click(self):
+        exam1=self.comboBox.currentText()
+        exam2=self.comboBox_2.currentText()
+        exam3=self.comboBox_3.currentText()
+        exam4=self.comboBox_4.currentText()
         #TO DO
         #if response.status_code == 200:
         #    print(response.status_code)
-            self.info.setText("Poprawnie zlecono badania")
+            #self.info.setText("Poprawnie zlecono badania")
 
         #else:
         #    self.info.setText("Wystąpił bład")
