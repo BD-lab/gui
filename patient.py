@@ -34,7 +34,7 @@ class Ui_MainWindow(object):
         self.window.show()
     def add(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_AddOrder()
+        self.ui = Ui_AddOrder(idGlobal)
         self.ui.setupUi(self.window)
         # MainWindow.hide()
         self.window.show()

@@ -18,7 +18,6 @@ class Ui_ChoosePatientWindow(object):
         pesel = self.peselInput.text()
         payload = {'pesel': pesel}
         response = requests.get("http://localhost:8080/patients", params=payload)
-        print(response.json())
         if response.status_code == 200:
             print(response.status_code)
             self.window = QtWidgets.QMainWindow()
