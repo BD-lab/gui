@@ -11,19 +11,24 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from ExamTypes import ExamTypes
 import requests
 
-
-idT =''
+idT = ''
+first=''
+last=''
 
 class Ui_AddOrder(object):
-    def __init__(self, id):
-        global idT
-        idT=id
+    def __init__(self, id,fn,ln):
+        global idT, first, last
+        idT = id
+        first = fn
+        last = ln
     def click(self):
         global idT
         idOrder = self.idOrderInput.text()
         exam1 = self.comboBox.currentText()
         exam2 = self.comboBox_2.currentText()
-        if(exam2=="brak"):
+        exam3 = self.comboBox_3.currentText()
+        exam4 = self.comboBox_4.currentText()
+        if (exam2 == "brak"):
             response = requests.post("http://localhost:8080/orders", json={
                 "orderNumber": idOrder,
                 "patientId": idT,
@@ -33,11 +38,10 @@ class Ui_AddOrder(object):
                     },
                 ]
             })
-        exam3 = self.comboBox_3.currentText()
-        if(exam3=="brak"):
+        elif (exam3 == "brak"):
             response = requests.post("http://localhost:8080/orders", json={
                 "orderNumber": idOrder,
-                "patientId": 1,  # TODO patiendId z poprzedniego okienka
+                "patientId": idT,
                 "examinations": [
                     {
                         "type": ExamTypes(exam1).name
@@ -47,28 +51,26 @@ class Ui_AddOrder(object):
                     },
                 ]
             })
-
-        exam4 = self.comboBox_4.currentText()
-        if(exam4=="brak"):
+        elif (exam4 == "brak"):
             response = requests.post("http://localhost:8080/orders", json={
-            "orderNumber": idOrder,
-            "patientId": 1, #TODO patiendId z poprzedniego okienka
-            "examinations": [
-                {
-                    "type": ExamTypes(exam1).name
-                },
-                {
-                    "type": ExamTypes(exam2).name
-                },
-                {
-                    "type": ExamTypes(exam3).name
-                },
-            ]
-        })
+                "orderNumber": idOrder,
+                "patientId": idT,
+                "examinations": [
+                    {
+                        "type": ExamTypes(exam1).name
+                    },
+                    {
+                        "type": ExamTypes(exam2).name
+                    },
+                    {
+                        "type": ExamTypes(exam3).name
+                    },
+                ]
+            })
         else:
             response = requests.post("http://localhost:8080/orders", json={
                 "orderNumber": idOrder,
-                "patientId": 1, #TODO patiendId z poprzedniego okienka
+                "patientId": idT,
                 "examinations": [
                     {
                         "type": ExamTypes(exam1).name
@@ -84,14 +86,15 @@ class Ui_AddOrder(object):
                     }
                 ]
             })
-
-        if response.status_code == 200:
-           print(response.status_code)
-           self.info.setText("Poprawnie zlecono badania")
+        print("ten status")
+        print(response.status_code)
+        if response.status_code == 201:
+            print(response.status_code)
+            self.info.setText("Poprawnie zlecono badania")
 
         else:
-           print(response.status_code)
-           self.info.setText("Wystąpił bład")
+            print(response.status_code)
+            self.info.setText("Wystąpił bład")
 
     def setupUi(self, AddOrder):
         AddOrder.setObjectName("AddOrder")
@@ -308,10 +311,13 @@ class Ui_AddOrder(object):
         QtCore.QMetaObject.connectSlotsByName(AddOrder)
 
     def retranslateUi(self, AddOrder):
+        global idT, first, last
+        text = first + " " + last
+        print(text)
         _translate = QtCore.QCoreApplication.translate
         AddOrder.setWindowTitle(_translate("AddOrder", "Dodaj zamówienie"))
         self.infoText.setText(_translate("AddOrder", "Dodajesz zamówienie do pacjenta"))
-        self.infoPatient.setText(_translate("AddOrder", "TextLabel"))
+        self.infoPatient.setText(_translate("AddOrder", text))
         self.idOrder.setText(_translate("AddOrder", "Numer zamówienia"))
         self.listOrder.setText(_translate("AddOrder", "Zlecone badania"))
         self.saveButton.setText(_translate("AddOrder", "Zapisz"))
