@@ -17,9 +17,12 @@ streetName=''
 buildingNumber=''
 zipCode=''
 city=''
+idG=""
 
 class Ui_EditPatientWindow(object):
     def __init__(self, id):
+        global idG
+        idG=id
         print(id)
         url="http://localhost:8080/patients/{}".format(id)
         response = requests.get(url)
@@ -41,6 +44,7 @@ class Ui_EditPatientWindow(object):
 
 
     def click(self):
+        global idG
         firstName = self.firstNameInput.text()
         lastName = self.lastNameInput.text()
         pesel = self.peselInput.text()
@@ -50,6 +54,7 @@ class Ui_EditPatientWindow(object):
         city = self.cityInput.text()
 
         response = requests.put("http://localhost:8080/patients", json={
+            "id" : idG,
             "firstName": firstName,
             "lastName": lastName,
             "pesel": pesel,

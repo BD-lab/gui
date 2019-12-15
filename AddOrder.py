@@ -87,6 +87,7 @@ class Ui_AddOrder(object):
                 ]
             })
         print("ten status")
+        print(response.json())
         print(response.status_code)
         if response.status_code == 201:
             print(response.status_code)
@@ -313,7 +314,6 @@ class Ui_AddOrder(object):
     def retranslateUi(self, AddOrder):
         global idT, first, last
         text = first + " " + last
-        print(text)
         _translate = QtCore.QCoreApplication.translate
         AddOrder.setWindowTitle(_translate("AddOrder", "Dodaj zamówienie"))
         self.infoText.setText(_translate("AddOrder", "Dodajesz zamówienie do pacjenta"))
