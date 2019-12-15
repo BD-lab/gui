@@ -8,11 +8,21 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+#from gui import Ui_Main
+import requests
 
 
 class Ui_PrintOrder(object):
     def printClick(self):
-        print()
+        idOrder=self.orderInput.text()
+        # TO DO request na drukowanie wyników
+
+       # self.window = QtWidgets.QMainWindow()
+        #self.ui = Ui_Main()
+       # self.ui.setupUi(self.window)
+        #ui.hide()
+      #  self.window.show()
+#
     def setupUi(self, PrintOrder):
         PrintOrder.setObjectName("PrintOrder")
         PrintOrder.resize(800, 600)
@@ -27,18 +37,15 @@ class Ui_PrintOrder(object):
         self.infoText = QtWidgets.QLabel(self.formLayoutWidget)
         self.infoText.setObjectName("infoText")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.infoText)
-        self.infoPatient = QtWidgets.QLabel(self.formLayoutWidget)
-        self.infoPatient.setObjectName("infoPatient")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.infoPatient)
         self.listInfo = QtWidgets.QLabel(self.formLayoutWidget)
         self.listInfo.setObjectName("listInfo")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.listInfo)
-        self.list = QtWidgets.QListWidget(self.formLayoutWidget)
-        self.list.setObjectName("list")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.list)
         self.printButton = QtWidgets.QPushButton(self.formLayoutWidget)
         self.printButton.setObjectName("printButton")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.printButton)
+        self.orderInput = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.orderInput.setObjectName("orderInput")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.orderInput)
         PrintOrder.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(PrintOrder)
         self.statusbar.setObjectName("statusbar")
@@ -50,9 +57,8 @@ class Ui_PrintOrder(object):
     def retranslateUi(self, PrintOrder):
         _translate = QtCore.QCoreApplication.translate
         PrintOrder.setWindowTitle(_translate("PrintOrder", "Drukuj wyniki"))
-        self.infoText.setText(_translate("PrintOrder", "Dodajesz zamówienie do pacjenta"))
-        self.infoPatient.setText(_translate("PrintOrder", "TextLabel"))
-        self.listInfo.setText(_translate("PrintOrder", "Lista badań pacjenta"))
+        self.infoText.setText(_translate("PrintOrder", "Drukujesz wyniki"))
+        self.listInfo.setText(_translate("PrintOrder", "Wpisz numer zamówienia"))
         self.printButton.setText(_translate("PrintOrder", "Drukuj"))
 
 
