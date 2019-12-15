@@ -10,7 +10,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import requests
 
-
 class Ui_EditPatientWindow(object):
     def click(self):
         firstName = self.firstNameInput.text()
@@ -32,7 +31,10 @@ class Ui_EditPatientWindow(object):
         })
         if response.status_code == 200:
             print(response.status_code)
-            #TODO komunikat, ze dane zostaly edytowane, w przeciwnym przypadku zwrocony blad
+            self.label.setText("Poprawnie edytowano dane")
+        else:
+            print(response.status_code)
+            self.label.setText("Wystąpił bład")
 
     def setupUi(self, EditPatientWindow):
         EditPatientWindow.setObjectName("EditPatientWindow")
@@ -92,6 +94,10 @@ class Ui_EditPatientWindow(object):
         self.saveButton.setObjectName("saveButton")
         self.saveButton.clicked.connect(self.click)
         self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.saveButton)
+        self.label = QtWidgets.QLabel(self.formLayoutWidget)
+        self.label.setText("")
+        self.label.setObjectName("label")
+        self.formLayout.setWidget(8, QtWidgets.QFormLayout.FieldRole, self.label)
         EditPatientWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(EditPatientWindow)
         self.statusbar.setObjectName("statusbar")
@@ -102,7 +108,7 @@ class Ui_EditPatientWindow(object):
 
     def retranslateUi(self, EditPatientWindow):
         _translate = QtCore.QCoreApplication.translate
-        EditPatientWindow.setWindowTitle(_translate("EditPatientWindow", "Edytuj Pacjenta"))
+        EditPatientWindow.setWindowTitle(_translate("EditPatientWindow", "MainWindow"))
         self.firstName.setText(_translate("EditPatientWindow", "Imię"))
         self.lastName.setText(_translate("EditPatientWindow", "Nazwisko"))
         self.pesel.setText(_translate("EditPatientWindow", "Pesel"))
@@ -115,7 +121,6 @@ class Ui_EditPatientWindow(object):
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     EditPatientWindow = QtWidgets.QMainWindow()
     ui = Ui_EditPatientWindow()
