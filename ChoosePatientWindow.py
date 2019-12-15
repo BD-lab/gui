@@ -12,9 +12,10 @@ from patient import Ui_MainWindow
 import requests
 
 
+
 class Ui_ChoosePatientWindow(object):
     def click(self):
-        pesel=self.peselInput.text()
+        pesel = self.peselInput.text()
         payload = {'pesel': pesel}
         response = requests.get("http://localhost:8080/patients", params=payload)
         if response.status_code == 200:
@@ -22,11 +23,11 @@ class Ui_ChoosePatientWindow(object):
             self.window = QtWidgets.QMainWindow()
             self.ui = Ui_MainWindow()
             self.ui.setupUi(self.window)
-            #ChoosePatientWindow.hide()
+            self.info.setText("Poprawnie wybrano pacjenta")
+            # ChoosePatientWindow.hide()
             self.window.show()
         else:
-            print()
-        # TODO  jeśli inny status response komunikat o tym, że pacjent nie istnieje
+            self.info.setText("Nie ma takiego pacjenta")
 
     def setupUi(self, ChoosePatientWindow):
         ChoosePatientWindow.setObjectName("ChoosePatientWindow")
@@ -49,6 +50,10 @@ class Ui_ChoosePatientWindow(object):
         self.chooseButton.setObjectName("chooseButton")
         self.chooseButton.clicked.connect(self.click)
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.chooseButton)
+        self.info = QtWidgets.QLabel(self.formLayoutWidget)
+        self.info.setText("")
+        self.info.setObjectName("info")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.info)
         ChoosePatientWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(ChoosePatientWindow)
         self.statusbar.setObjectName("statusbar")
@@ -59,7 +64,7 @@ class Ui_ChoosePatientWindow(object):
 
     def retranslateUi(self, ChoosePatientWindow):
         _translate = QtCore.QCoreApplication.translate
-        ChoosePatientWindow.setWindowTitle(_translate("ChoosePatientWindow", "Wybierz Pacjenta"))
+        ChoosePatientWindow.setWindowTitle(_translate("ChoosePatientWindow", "Wybierz pacjenta"))
         self.pesel.setText(_translate("ChoosePatientWindow", "Pesel"))
         self.chooseButton.setText(_translate("ChoosePatientWindow", "Wybierz"))
 
