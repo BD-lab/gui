@@ -2,6 +2,7 @@ from enum import Enum
 
 
 class ExamTypes(Enum):
+    NONE="brak"
     HAEMOGLOBIN = "Hemoglobina"
     LEUKOCYTES = "Leukocyty"
     PLATELETS = "Płytki krwi"

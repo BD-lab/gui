@@ -13,16 +13,13 @@ import  requests
 
 class Ui_AddOrder(object):
     def click(self):
-        pesel = self.peselInput.text()
-        payload = {'pesel': pesel}
-        response = requests.get("http://localhost:8080/patients", params=payload)
-        if response.status_code == 200:
-            print(response.status_code)
-            self.info.setText("Poprawnie wybrano pacjenta")
+        #TO DO
+        #if response.status_code == 200:
+        #    print(response.status_code)
+            self.info.setText("Poprawnie zlecono badania")
 
-        else:
-            self.info.setText("Nie ma takiego pacjenta")
-
+        #else:
+        #    self.info.setText("Wystąpił bład")
     def setupUi(self, AddOrder):
         AddOrder.setObjectName("AddOrder")
         AddOrder.resize(800, 600)
@@ -51,10 +48,13 @@ class Ui_AddOrder(object):
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.listOrder)
         self.saveButton = QtWidgets.QPushButton(self.formLayoutWidget)
         self.saveButton.setObjectName("saveButton")
+        self.saveButton.clicked.connect(self.click)
+
         self.formLayout.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.saveButton)
         self.comboBox = QtWidgets.QComboBox(self.formLayoutWidget)
         self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItem("Hemoglobina",ExamTypes.HAEMOGLOBIN)
+        self.comboBox.addItem("brak", ExamTypes.NONE)
+        self.comboBox.addItem("Hemoglobina", ExamTypes.HAEMOGLOBIN)
         self.comboBox.addItem("Leukocyty", ExamTypes.LEUKOCYTES)
         self.comboBox.addItem("Płytki krwi", ExamTypes.PLATELETS)
         self.comboBox.addItem("Hematokryt", ExamTypes.HAEMATOCRIT)
@@ -96,6 +96,7 @@ class Ui_AddOrder(object):
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.comboBox)
         self.comboBox_2 = QtWidgets.QComboBox(self.formLayoutWidget)
         self.comboBox_2.setObjectName("comboBox_2")
+        self.comboBox_2.addItem("brak", ExamTypes.NONE)
         self.comboBox_2.addItem("Hemoglobina", ExamTypes.HAEMOGLOBIN)
         self.comboBox_2.addItem("Leukocyty", ExamTypes.LEUKOCYTES)
         self.comboBox_2.addItem("Płytki krwi", ExamTypes.PLATELETS)
@@ -138,6 +139,7 @@ class Ui_AddOrder(object):
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.comboBox_2)
         self.comboBox_3 = QtWidgets.QComboBox(self.formLayoutWidget)
         self.comboBox_3.setObjectName("comboBox_3")
+        self.comboBox_3.addItem("brak", ExamTypes.NONE)
         self.comboBox_3.addItem("Hemoglobina", ExamTypes.HAEMOGLOBIN)
         self.comboBox_3.addItem("Leukocyty", ExamTypes.LEUKOCYTES)
         self.comboBox_3.addItem("Płytki krwi", ExamTypes.PLATELETS)
@@ -180,6 +182,7 @@ class Ui_AddOrder(object):
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.comboBox_3)
         self.comboBox_4 = QtWidgets.QComboBox(self.formLayoutWidget)
         self.comboBox_4.setObjectName("comboBox_4")
+        self.comboBox_4.addItem("brak", ExamTypes.NONE)
         self.comboBox_4.addItem("Hemoglobina", ExamTypes.HAEMOGLOBIN)
         self.comboBox_4.addItem("Leukocyty", ExamTypes.LEUKOCYTES)
         self.comboBox_4.addItem("Płytki krwi", ExamTypes.PLATELETS)
@@ -218,8 +221,11 @@ class Ui_AddOrder(object):
         self.comboBox_4.addItem("Marchewka", ExamTypes.CARROT)
         self.comboBox_4.addItem("Ziemniak", ExamTypes.POTATO)
         self.comboBox_4.addItem("Jabłko", ExamTypes.APPLE)
-
         self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.comboBox_4)
+        self.info = QtWidgets.QLabel(self.formLayoutWidget)
+        self.info.setText("")
+        self.info.setObjectName("info")
+        self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.info)
         AddOrder.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(AddOrder)
         self.statusbar.setObjectName("statusbar")
