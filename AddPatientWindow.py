@@ -41,10 +41,13 @@ class Ui_AddPatientWindow(object):
             "zipCode": zipCode,
             "city": city
         })
-        if response.status_code == 200:
+        if response.status_code == 200 :
             print(response.status_code)
             self.info.setText("Poprawnie dodano pacjenta")
 
+        elif response.status_code == 201:
+            print(response.status_code)
+            self.info.setText("Poprawnie dodano pacjenta")
 
         else:
             print(response.status_code)
@@ -106,6 +109,7 @@ class Ui_AddPatientWindow(object):
         self.saveButton = QtWidgets.QPushButton(self.formLayoutWidget)
         self.saveButton.setObjectName("saveButton")
         self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.saveButton)
+        self.saveButton.clicked.connect(self.click)
         self.info = QtWidgets.QLabel(self.formLayoutWidget)
         self.info.setText("")
         self.info.setObjectName("info")
