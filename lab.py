@@ -30,6 +30,7 @@ class Ui_MainWindow(object):
         if response.status_code == 200:
             json = response.json()
             print(json)
+            global i
             for i in json:
                 id = i['id']
                 examination_type = i['examinationType']
@@ -39,11 +40,10 @@ class Ui_MainWindow(object):
 
     def saveFun(self):
         global id
+        global i
         examination_result_id = id
         patient_value=self.putResult.text()
-        #TO DO
-        #zrobic responsa ktory wysyla cos
-        response = requests.put("http://localhost:8081/examinations/examination_result_id{}".format(examination_result_id))
+        response = requests.put("http://localhost:8081/examinations/{}?patientValue={}".format(examination_result_id,patient_value))
         print(response.status_code)
         if response.status_code == 200:
             json = response.json()
