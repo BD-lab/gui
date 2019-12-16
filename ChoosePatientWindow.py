@@ -50,9 +50,7 @@ class Ui_ChoosePatientWindow(object):
         self.info.setObjectName("info")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.info)
         ChoosePatientWindow.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(ChoosePatientWindow)
-        self.statusbar.setObjectName("statusbar")
-        ChoosePatientWindow.setStatusBar(self.statusbar)
+
 
         self.retranslateUi(ChoosePatientWindow)
         QtCore.QMetaObject.connectSlotsByName(ChoosePatientWindow)

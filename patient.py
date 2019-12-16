@@ -27,13 +27,13 @@ class Ui_MainWindow(object):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_AddOrder(idGlobal,firstname,lastname)
         self.ui.setupUi(self.window)
-        # MainWindow.hide()
+        #MainWindow.hide()
         self.window.show()
     def print(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_PrintOrder()
         self.ui.setupUi(self.window)
-        # MainWindow.hide()
+        #MainWindow.hide()
         self.window.show()
     def setupUi(self, MainWindow):
         global lastname

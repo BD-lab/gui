@@ -1,16 +1,52 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'lab.ui'
+#
+# Created by: PyQt5 UI code generator 5.12.3
+#
+# WARNING! All changes made in this file will be lost!
+
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+import requests
 
 
 class Ui_MainWindow(object):
     def getOrdersFun(self):
-        # TO DO request
-        print()
+        response = requests.get("http://localhost:8081/examinations/orderNumbers")
+        if response.status_code == 200:
+            json = response.json()
+            print(json)
+            for i in json:
+                print(i)
+            self.orders.addItem("123") # TO DO wrzucić do comboboxa pobrane wartości
+
+
     def getExamsFun(self):
-        # TO DO request
-        print()
+        order_number = self.orders.currentText()
+        url="http://localhost:8081/examinations/order/{}".format(order_number)
+        response = requests.get(url)
+
+        if response.status_code == 200:
+            json = response.json()
+            self.id = json['id']
+            self.examination_type = json['type']
+            self.exams.addItem(self.examination_type) # TO DO chyba tak jak teraz tyko dla większej ilosci
+
+
+
     def saveFun(self):
-        # TO DO request
-        print()
+        examination_result_id = self.id
+        patient_value=self.putResult.text()
+
+        response = requests.put("http://localhost:8081/examinations/examination_result_id{}".format(examination_result_id))
+
+        if response.status_code == 200:
+            json = response.json()
+            self.info.setText("Poprawnie zapisano wynik")
+        else:
+            self.info.setText("Wystąpił błąd")
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
@@ -76,6 +112,7 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
