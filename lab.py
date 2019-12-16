@@ -33,7 +33,7 @@ class Ui_MainWindow(object):
             for i in json:
                 id = i['id']
                 examination_type = i['examinationType']
-                self.exams.addItem(examination_type) # TO DO chyba tak jak teraz tyko dla większej ilosci
+                self.exams.addItem(examination_type)
 
 
 
@@ -41,6 +41,8 @@ class Ui_MainWindow(object):
         global id
         examination_result_id = id
         patient_value=self.putResult.text()
+        #TO DO
+        #zrobic responsa ktory wysyla cos
         response = requests.put("http://localhost:8081/examinations/examination_result_id{}".format(examination_result_id))
         print(response.status_code)
         if response.status_code == 200:
