@@ -13,6 +13,7 @@ import requests
 id = 0
 class Ui_MainWindow(object):
     def getOrdersFun(self):
+        self.orders.clear()
         response = requests.get("http://localhost:8081/examinations/orderNumbers")
         if response.status_code == 200:
             json = response.json()
@@ -23,6 +24,7 @@ class Ui_MainWindow(object):
 
     def getExamsFun(self):
         global id
+        self.exams.clear()
         order_number = self.orders.currentText()
         url="http://localhost:8081/examinations/order/?orderNumber={}".format(order_number)
         response = requests.get(url)

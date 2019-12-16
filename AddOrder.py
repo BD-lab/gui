@@ -77,8 +77,6 @@ class Ui_AddOrder(object):
                     }
                 ]
             })
-        print("ten status")
-        print(response.json())
         print(response.status_code)
         if response.status_code == 201:
             print(response.status_code)
