@@ -7,7 +7,7 @@ class Ui_PrintOrder(object):
     def printClick(self):
         idOrder=self.orderInput.text()
 
-        response = requests.get('http://localhost:8080/orders/result/idOrder(%d)/print' % idOrder)
+        response = requests.get('http://localhost:8080/orders/result/{}/print'.format(idOrder))
 
     def setupUi(self, PrintOrder):
         PrintOrder.setObjectName("PrintOrder")

@@ -10,7 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import requests
 
-
+id = 0
 class Ui_MainWindow(object):
     def getOrdersFun(self):
         response = requests.get("http://localhost:8081/examinations/orderNumbers")
@@ -18,29 +18,31 @@ class Ui_MainWindow(object):
             json = response.json()
             print(json)
             for i in json:
-                print(i)
-            self.orders.addItem("123") # TO DO wrzucić do comboboxa pobrane wartości
+                self.orders.addItem(i)
 
 
     def getExamsFun(self):
+        global id
         order_number = self.orders.currentText()
-        url="http://localhost:8081/examinations/order/{}".format(order_number)
+        url="http://localhost:8081/examinations/order/?orderNumber={}".format(order_number)
         response = requests.get(url)
 
         if response.status_code == 200:
             json = response.json()
-            self.id = json['id']
-            self.examination_type = json['type']
-            self.exams.addItem(self.examination_type) # TO DO chyba tak jak teraz tyko dla większej ilosci
+            print(json)
+            for i in json:
+                id = i['id']
+                examination_type = i['examinationType']
+                self.exams.addItem(examination_type) # TO DO chyba tak jak teraz tyko dla większej ilosci
 
 
 
     def saveFun(self):
-        examination_result_id = self.id
+        global id
+        examination_result_id = id
         patient_value=self.putResult.text()
-
         response = requests.put("http://localhost:8081/examinations/examination_result_id{}".format(examination_result_id))
-
+        print(response.status_code)
         if response.status_code == 200:
             json = response.json()
             self.info.setText("Poprawnie zapisano wynik")
