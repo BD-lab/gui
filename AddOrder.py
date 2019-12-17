@@ -359,7 +359,7 @@ class Ui_AddOrder(object):
         elif response.status_code == 409:
             self.info.setText("Zamówienie o podanym numerze już istnieje")
         elif response.status_code == 423:
-            self.info.setText("Nie można się połączyć z wszystkimi laboratoriami wymaganymi dla podanego zamówienia. Operacja została cofnięta.")
+            self.info.setText("Nie można połączyć z wszystkimi laboratoriami wymaganymi dla zamówienia.")
         else:
             print(response.status_code)
             self.info.setText("Wystąpił bład")
