@@ -1,14 +1,24 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 import requests
 
 
 class Ui_PrintOrder(object):
     def printClick(self):
-        idOrder=self.orderInput.text()
+        idOrder = self.orderInput.text()
 
         response = requests.get('http://localhost:8080/orders/result/{}/print'.format(idOrder))
+        if response.status_code == 200:
+            self.response.setText("Poprawnie wydrukowano")
+        elif response.status_code == 201:
+            self.response.setText("Poprawnie wydrukowano")
+        elif response.status_code == 404:
+            self.response.setText("Zamówienie o podanym numerze nie istnieje")
+        elif response.status_code == 409:
+            self.response.setText("Zamówienie jeszcze nie zostało skompletowane")
 
+        else:
+            print(response.status_code)
+            self.response.setText("Wystąpił bład")
     def setupUi(self, PrintOrder):
         PrintOrder.setObjectName("PrintOrder")
         PrintOrder.resize(800, 600)
@@ -33,6 +43,10 @@ class Ui_PrintOrder(object):
         self.orderInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.orderInput.setObjectName("orderInput")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.orderInput)
+        self.response = QtWidgets.QLabel(self.formLayoutWidget)
+        self.response.setText("")
+        self.response.setObjectName("response")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.response)
         PrintOrder.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(PrintOrder)
         self.statusbar.setObjectName("statusbar")
@@ -44,7 +58,7 @@ class Ui_PrintOrder(object):
     def retranslateUi(self, PrintOrder):
         _translate = QtCore.QCoreApplication.translate
         PrintOrder.setWindowTitle(_translate("PrintOrder", "Drukuj wyniki"))
-        self.infoText.setText(_translate("PrintOrder", "Drukujesz wyniki"))
+        self.infoText.setText(_translate("PrintOrder", "Drukujesz zamówienie"))
         self.listInfo.setText(_translate("PrintOrder", "Wpisz numer zamówienia"))
         self.printButton.setText(_translate("PrintOrder", "Drukuj"))
 

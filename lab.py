@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import requests
 from ExamTypes import ExamTypes
 
-id = 0
+idG = 0
 class Ui_MainWindow(object):
     def getOrdersFun(self):
         self.orders.clear()
@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
 
 
     def getExamsFun(self):
-        global id
+        global idG
         self.exams.clear()
         order_number = self.orders.currentText()
         url="http://localhost:8081/examinations/order/?orderNumber={}".format(order_number)
@@ -34,7 +34,7 @@ class Ui_MainWindow(object):
             print(json)
             global i
             for i in json:
-                id = i['id']
+                idG = i['id']
                 u = i['examinationType']
                 examination_type = ExamTypes[u].value
                 self.exams.addItem(examination_type)
@@ -42,13 +42,15 @@ class Ui_MainWindow(object):
 
 
     def saveFun(self):
-        global id
-        examination_result_id = id
+        global idG
+        examination_result_id = idG
         patient_value=self.putResult.text()
         response = requests.put("http://localhost:8081/examinations/{}?patientValue={}".format(examination_result_id,patient_value))
         print(response.status_code)
         if response.status_code == 200:
             self.info.setText("Poprawnie zapisano wynik")
+        elif response.status_code == 400:
+            self.info.setText("Wprowadzono niepoprawną wartość")
         else:
             self.info.setText("Wystąpił błąd")
 

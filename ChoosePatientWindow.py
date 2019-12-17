@@ -10,7 +10,6 @@ class Ui_ChoosePatientWindow(object):
         payload = {'pesel': pesel}
         response = requests.get("http://localhost:8080/patients", params=payload)
         if response.status_code == 200:
-            print(response.status_code)
             self.window = QtWidgets.QMainWindow()
             self.message=response.json()
             self.id=response.json()['id']
@@ -21,6 +20,9 @@ class Ui_ChoosePatientWindow(object):
             self.info.setText("Poprawnie wybrano pacjenta")
             #ChoosePatientWindow.hide()
             self.window.show()
+
+        elif response.status_code == 404:
+            self.info.setText("Pacjent o podanym nr PESEL nie istnieje")
         else:
             self.info.setText("Nie ma takiego pacjenta")
 

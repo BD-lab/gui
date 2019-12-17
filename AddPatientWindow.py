@@ -42,13 +42,16 @@ class Ui_AddPatientWindow(object):
             "city": city
         })
         if response.status_code == 200 :
-            print(response.status_code)
             self.info.setText("Poprawnie dodano pacjenta")
 
         elif response.status_code == 201:
-            print(response.status_code)
             self.info.setText("Poprawnie dodano pacjenta")
 
+        elif response.status_code == 400:
+            self.info.setText("Nieprawidłowy numer PESEL")
+
+        elif response.status_code == 409:
+            self.info.setText("Pacjent o podanym nr PESEL już istnieje")
         else:
             print(response.status_code)
             self.info.setText("Wystąpił błąd")
