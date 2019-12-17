@@ -11,7 +11,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import requests
 from ExamTypes import ExamTypes
 
-idG = 0
+idG = []
+ex_type=[]
 class Ui_MainWindow(object):
     def getOrdersFun(self):
         self.orders.clear()
@@ -24,6 +25,7 @@ class Ui_MainWindow(object):
 
     def getExamsFun(self):
         global idG
+        global ex_type
         self.exams.clear()
         order_number = self.orders.currentText()
         url="http://localhost:8081/examinations/order/?orderNumber={}".format(order_number)
@@ -32,18 +34,19 @@ class Ui_MainWindow(object):
         if response.status_code == 200:
             json = response.json()
             print(json)
-            global i
             for i in json:
-                idG = i['id']
-                u = i['examinationType']
-                examination_type = ExamTypes[u].value
+                idG.append(i['id'])
+                ex_type.append(i['examinationType'])
+                examination_type = ExamTypes[i['examinationType']].value
                 self.exams.addItem(examination_type)
-
+            print(idG)
 
 
     def saveFun(self):
         global idG
-        examination_result_id = idG
+        global ex_type
+        ex=ExamTypes(self.exams.currentText()).name
+        examination_result_id = idG[ex_type.index(ex)]
         patient_value=self.putResult.text()
         response = requests.put("http://localhost:8081/examinations/{}?patientValue={}".format(examination_result_id,patient_value))
         print(response.status_code)
