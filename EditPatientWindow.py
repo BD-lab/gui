@@ -35,24 +35,25 @@ class Ui_EditPatientWindow(object):
 
     def click(self):
         global idG
+        global pesel
+        print(pesel)
         firstName = self.firstNameInput.text()
         lastName = self.lastNameInput.text()
         streetName = self.streetNameInput.text()
         buildingNumber = self.buildingNumberInput.text()
         zipCode = self.zipCodeInput.text()
         city = self.cityInput.text()
-        url="http://localhost:8080/patients/{}".format(idG)
-        response = requests.put(url, json={
+        response = requests.put("http://localhost:8080/patients/", json={
             "id": idG,
             "firstName": firstName,
             "lastName": lastName,
+            "pesel": pesel,
             "streetName": streetName,
             "buildingNumber": buildingNumber,
             "zipCode": zipCode,
             "city": city
         })
         if response.status_code == 200:
-            print(response.status_code)
             self.label.setText("Poprawnie edytowano dane")
         else:
             print(response.status_code)
