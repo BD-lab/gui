@@ -13,9 +13,9 @@ idG=""
 class Ui_EditPatientWindow(object):
     def __init__(self, id):
         global idG
-        idG=id
+        idG = id
         print(id)
-        url="http://localhost:8080/patients/{}".format(id)
+        url = "http://localhost:8080/patients/{}".format(id)
         response = requests.get(url)
         print(response.json())
         global lastName
@@ -33,22 +33,19 @@ class Ui_EditPatientWindow(object):
         global city
         city = response.json()['city']
 
-
     def click(self):
         global idG
         firstName = self.firstNameInput.text()
         lastName = self.lastNameInput.text()
-        pesel = self.peselInput.text()
         streetName = self.streetNameInput.text()
         buildingNumber = self.buildingNumberInput.text()
         zipCode = self.zipCodeInput.text()
         city = self.cityInput.text()
-
-        response = requests.put("http://localhost:8080/patients", json={
-            "id" : idG,
+        url="http://localhost:8080/patients/{}".format(idG)
+        response = requests.put(url, json={
+            "id": idG,
             "firstName": firstName,
             "lastName": lastName,
-            "pesel": pesel,
             "streetName": streetName,
             "buildingNumber": buildingNumber,
             "zipCode": zipCode,
@@ -83,6 +80,10 @@ class Ui_EditPatientWindow(object):
         self.firstName = QtWidgets.QLabel(self.formLayoutWidget)
         self.firstName.setObjectName("firstName")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.firstName)
+        self.firstNameInput = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.firstNameInput.setObjectName("firstNameInput")
+        self.firstNameInput.setText(firstName)
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.firstNameInput)
         self.lastName = QtWidgets.QLabel(self.formLayoutWidget)
         self.lastName.setObjectName("lastName")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.lastName)
@@ -90,53 +91,42 @@ class Ui_EditPatientWindow(object):
         self.lastNameInput.setObjectName("lastNameInput")
         self.lastNameInput.setText(lastName)
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.lastNameInput)
-        self.pesel = QtWidgets.QLabel(self.formLayoutWidget)
-        self.pesel.setObjectName("pesel")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.pesel)
         self.streetName = QtWidgets.QLabel(self.formLayoutWidget)
         self.streetName.setObjectName("streetName")
-        self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.streetName)
-        self.buildingNumber = QtWidgets.QLabel(self.formLayoutWidget)
-        self.buildingNumber.setObjectName("buildingNumber")
-        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.buildingNumber)
-        self.zipCode = QtWidgets.QLabel(self.formLayoutWidget)
-        self.zipCode.setObjectName("zipCode")
-        self.formLayout.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.zipCode)
-        self.city = QtWidgets.QLabel(self.formLayoutWidget)
-        self.city.setObjectName("city")
-        self.formLayout.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.city)
-        self.cityInput = QtWidgets.QLineEdit(self.formLayoutWidget)
-        self.cityInput.setObjectName("cityInput")
-        self.cityInput.setText(city)
-        self.formLayout.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.cityInput)
-        self.zipCodeInput = QtWidgets.QLineEdit(self.formLayoutWidget)
-        self.zipCodeInput.setObjectName("zipCodeInput")
-        self.zipCodeInput.setText(zipCode)
-        self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.zipCodeInput)
-        self.firstNameInput = QtWidgets.QLineEdit(self.formLayoutWidget)
-        self.firstNameInput.setObjectName("firstNameInput")
-        self.firstNameInput.setText(firstName)
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.firstNameInput)
-        self.peselInput = QtWidgets.QLineEdit(self.formLayoutWidget)
-        self.peselInput.setObjectName("peselInput")
-        self.peselInput.setText(pesel)
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.peselInput)
-        self.buildingNumberInput = QtWidgets.QLineEdit(self.formLayoutWidget)
-        self.buildingNumberInput.setObjectName("buildingNumberInput")
-        self.buildingNumberInput.setText(buildingNumber)
-        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.buildingNumberInput)
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.streetName)
         self.streetNameInput = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.streetNameInput.setObjectName("streetNameInput")
         self.streetNameInput.setText(streetName)
-        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.streetNameInput)
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.streetNameInput)
+        self.buildingNumber = QtWidgets.QLabel(self.formLayoutWidget)
+        self.buildingNumber.setObjectName("buildingNumber")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.buildingNumber)
+        self.buildingNumberInput = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.buildingNumberInput.setObjectName("buildingNumberInput")
+        self.buildingNumberInput.setText(buildingNumber)
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.buildingNumberInput)
+        self.zipCode = QtWidgets.QLabel(self.formLayoutWidget)
+        self.zipCode.setObjectName("zipCode")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.zipCode)
+        self.zipCodeInput = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.zipCodeInput.setObjectName("zipCodeInput")
+        self.zipCodeInput.setText(zipCode)
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.zipCodeInput)
+        self.city = QtWidgets.QLabel(self.formLayoutWidget)
+        self.city.setObjectName("city")
+        self.formLayout.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.city)
+        self.cityInput = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.cityInput.setObjectName("cityInput")
+        self.cityInput.setText(city)
+        self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.cityInput)
         self.saveButton = QtWidgets.QPushButton(self.formLayoutWidget)
         self.saveButton.setObjectName("saveButton")
         self.saveButton.clicked.connect(self.click)
-        self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.saveButton)
+        self.formLayout.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.saveButton)
         self.label = QtWidgets.QLabel(self.formLayoutWidget)
         self.label.setText("")
         self.label.setObjectName("label")
-        self.formLayout.setWidget(8, QtWidgets.QFormLayout.FieldRole, self.label)
+        self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.label)
         EditPatientWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(EditPatientWindow)
         self.statusbar.setObjectName("statusbar")
@@ -147,10 +137,9 @@ class Ui_EditPatientWindow(object):
 
     def retranslateUi(self, EditPatientWindow):
         _translate = QtCore.QCoreApplication.translate
-        EditPatientWindow.setWindowTitle(_translate("EditPatientWindow", "MainWindow"))
+        EditPatientWindow.setWindowTitle(_translate("EditPatientWindow", "Edytuj pacjenta"))
         self.firstName.setText(_translate("EditPatientWindow", "Imię"))
         self.lastName.setText(_translate("EditPatientWindow", "Nazwisko"))
-        self.pesel.setText(_translate("EditPatientWindow", "Pesel"))
         self.streetName.setText(_translate("EditPatientWindow", "Ulica"))
         self.buildingNumber.setText(_translate("EditPatientWindow", "Numer Domu"))
         self.zipCode.setText(_translate("EditPatientWindow", "Kod Pocztowy"))
