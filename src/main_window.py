@@ -11,10 +11,31 @@ from ChoosePatientWindow import Ui_ChoosePatientWindow
 class HelpDialog(QDialog):
     def __init__(self, parent=None):
         QDialog.__init__(self, parent)
-        self.setFixedSize(300, 400)
+        self.setWindowTitle("Pomoc")
+        self.setFixedSize(900, 450)
         self.label = QLabel("""
-        Test
-        Test
+        Menu główne:
+            Wybierz pacjenta
+                Umożliwia wybór pacjenta o podanym numerze PESEL
+            Dodaj pacjenta
+                Umożliwia dodanie nowego pacjenta do bazy danych o następujących polach:
+                    - Imię
+                    - Nazwisko
+                    - PESEL
+                    - Ulica
+                    - Numer domu
+                    - Kod pocztowy
+                    - Miasto
+        
+        Po wyborze pacjenta dostępne są następujące opcje:
+            Edycja pacjenta
+                Umożliwia edytowanie danych pacjenta dla pól jak powyżej, poza numerem PESEL
+            Dodanie zamówienia
+                Umożliwia wprowadzenie numeru zamówienia oraz wybór z rozwijanej listy typów badań - maksymalnie 12.
+            Wydrukowanie zamówienia dla pacjenta
+                Umożliwia wprowadzenie numeru zamówienie oraz sprawdza, czy wszystkie wyniki badań są dostępne. 
+                W przypadku pozytywnej odpowiedzi przekierowuje do okna zapisu i wydruku badań, w przeciwnym wyświetlana
+                jest informacja o niekompletności badań.
         """)
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.label)
