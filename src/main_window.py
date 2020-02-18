@@ -46,6 +46,10 @@ class MainWindow(QWidget):
         self.setFixedSize(400, 200)
         self.setWindowTitle("Clinic")
 
+        # Other windows
+        self.window = None
+        self.ui = None
+
         # Widgets
         self.menu = QMenuBar()
         self.file_menu = self.menu.addMenu("Plik")
