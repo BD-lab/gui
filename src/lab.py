@@ -1,18 +1,12 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'lab.ui'
-#
-# Created by: PyQt5 UI code generator 5.12.3
-#
-# WARNING! All changes made in this file will be lost!
-
-
-from PyQt5 import QtCore, QtGui, QtWidgets
 import requests
+from PySide2 import QtCore, QtWidgets
+
 from ExamTypes import ExamTypes
 
 idG = []
-ex_type=[]
+ex_type = []
+
+
 class Ui_MainWindow(object):
     def getOrdersFun(self):
         self.orders.clear()
@@ -22,13 +16,12 @@ class Ui_MainWindow(object):
             for i in json:
                 self.orders.addItem(i)
 
-
     def getExamsFun(self):
         global idG
         global ex_type
         self.exams.clear()
         order_number = self.orders.currentText()
-        url="http://localhost:8081/examinations/order/?orderNumber={}".format(order_number)
+        url = "http://localhost:8081/examinations/order/?orderNumber={}".format(order_number)
         response = requests.get(url)
 
         if response.status_code == 200:
@@ -41,14 +34,14 @@ class Ui_MainWindow(object):
                 self.exams.addItem(examination_type)
             print(idG)
 
-
     def saveFun(self):
         global idG
         global ex_type
-        ex=ExamTypes(self.exams.currentText()).name
+        ex = ExamTypes(self.exams.currentText()).name
         examination_result_id = idG[ex_type.index(ex)]
-        patient_value=self.putResult.text()
-        response = requests.put("http://localhost:8081/examinations/{}?patientValue={}".format(examination_result_id,patient_value))
+        patient_value = self.putResult.text()
+        response = requests.put(
+            "http://localhost:8081/examinations/{}?patientValue={}".format(examination_result_id, patient_value))
         print(response.status_code)
         if response.status_code == 200:
             self.info.setText("Poprawnie zapisano wynik")

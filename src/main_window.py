@@ -79,11 +79,17 @@ class MainWindow(QWidget):
 
     @Slot()
     def show_choose_patient(self):
-        print("Choose patient")
+        self.window = QMainWindow()
+        self.ui = Ui_ChoosePatientWindow()
+        self.ui.setupUi(self.window)
+        self.window.show()
 
     @Slot()
     def show_add_patient(self):
-        print("Add patient")
+        self.window = QMainWindow()
+        self.ui = Ui_AddPatientWindow()
+        self.ui.setupUi(self.window)
+        self.window.show()
 
     @Slot()
     def show_help_dialog(self):

@@ -1,5 +1,5 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
 import requests
+from PySide2 import QtCore, QtWidgets
 
 
 class Ui_PrintOrder(object):
@@ -19,6 +19,7 @@ class Ui_PrintOrder(object):
         else:
             print(response.status_code)
             self.response.setText("Wystąpił bład")
+
     def setupUi(self, PrintOrder):
         PrintOrder.setObjectName("PrintOrder")
         PrintOrder.resize(800, 600)
@@ -65,6 +66,7 @@ class Ui_PrintOrder(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     PrintOrder = QtWidgets.QMainWindow()
     ui = Ui_PrintOrder()

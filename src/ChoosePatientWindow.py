@@ -1,7 +1,7 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-from patient import Ui_MainWindow
 import requests
+from PySide2 import QtCore, QtWidgets
 
+from patient import Ui_MainWindow
 
 
 class Ui_ChoosePatientWindow(object):
@@ -11,14 +11,14 @@ class Ui_ChoosePatientWindow(object):
         response = requests.get("http://localhost:8080/patients", params=payload)
         if response.status_code == 200:
             self.window = QtWidgets.QMainWindow()
-            self.message=response.json()
-            self.id=response.json()['id']
+            self.message = response.json()
+            self.id = response.json()['id']
             self.firstName = response.json()['firstName']
             self.lastName = response.json()['lastName']
             self.ui = Ui_MainWindow(self.firstName, self.lastName, self.id)
             self.ui.setupUi(self.window)
             self.info.setText("Poprawnie wybrano pacjenta")
-            #ChoosePatientWindow.hide()
+            # ChoosePatientWindow.hide()
             self.window.show()
 
         elif response.status_code == 404:
@@ -53,7 +53,6 @@ class Ui_ChoosePatientWindow(object):
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.info)
         ChoosePatientWindow.setCentralWidget(self.centralwidget)
 
-
         self.retranslateUi(ChoosePatientWindow)
         QtCore.QMetaObject.connectSlotsByName(ChoosePatientWindow)
 
@@ -66,6 +65,7 @@ class Ui_ChoosePatientWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     ChoosePatientWindow = QtWidgets.QMainWindow()
     ui = Ui_ChoosePatientWindow()

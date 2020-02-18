@@ -1,14 +1,15 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
 import requests
+from PySide2 import QtCore, QtWidgets
 
-lastName='x'
-firstName=''
-pesel=''
-streetName=''
-buildingNumber=''
-zipCode=''
-city=''
-idG=""
+lastName = 'x'
+firstName = ''
+pesel = ''
+streetName = ''
+buildingNumber = ''
+zipCode = ''
+city = ''
+idG = ""
+
 
 class Ui_EditPatientWindow(object):
     def __init__(self, id):
@@ -150,6 +151,7 @@ class Ui_EditPatientWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     EditPatientWindow = QtWidgets.QMainWindow()
     ui = Ui_EditPatientWindow()
