@@ -1,15 +1,7 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'AddPatientWindow.ui'
-#
-# Created by: PyQt5 UI code generator 5.12.3
-#
-# WARNING! All changes made in this file will be lost!
-
 from tokenize import String
 
-from PyQt5 import QtCore, QtGui, QtWidgets
 import requests
+from PySide2 import QtCore, QtWidgets
 
 
 class Patient:
@@ -21,6 +13,7 @@ class Patient:
     buildingNumber: String
     zipCode: String
     city: String
+
 
 class Ui_AddPatientWindow(object):
     def click(self):
@@ -41,7 +34,7 @@ class Ui_AddPatientWindow(object):
             "zipCode": zipCode,
             "city": city
         })
-        if response.status_code == 200 :
+        if response.status_code == 200:
             self.info.setText("Poprawnie dodano pacjenta")
 
         elif response.status_code == 201:
@@ -55,6 +48,7 @@ class Ui_AddPatientWindow(object):
         else:
             print(response.status_code)
             self.info.setText("Wystąpił błąd")
+
     def setupUi(self, AddPatientWindow):
         AddPatientWindow.setObjectName("AddPatientWindow")
         AddPatientWindow.resize(800, 600)
@@ -140,11 +134,10 @@ class Ui_AddPatientWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     AddPatientWindow = QtWidgets.QMainWindow()
     ui = Ui_AddPatientWindow()
     ui.setupUi(AddPatientWindow)
     AddPatientWindow.show()
     sys.exit(app.exec_())
-
-

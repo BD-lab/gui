@@ -1,4 +1,4 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PySide2 import QtCore, QtGui, QtWidgets
 from EditPatientWindow import Ui_EditPatientWindow
 from AddOrder import Ui_AddOrder
 from PrintOrder import Ui_PrintOrder

@@ -1,6 +1,7 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-from ExamTypes import ExamTypes
 import requests
+from PySide2 import QtCore, QtWidgets
+
+from ExamTypes import ExamTypes
 
 idT = ''
 first = ''
